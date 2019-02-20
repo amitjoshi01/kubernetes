@@ -16,7 +16,8 @@ RUN /usr/local/bin/install-plugins.sh robot
 RUN /usr/local/bin/install-plugins.sh kubernetes
 
 #Test
-RUN apt-get update && apt-get install --quiet --assume-yes python-pip unzip firefox wget
+#RUN apt-get update && apt-get install --quiet --assume-yes python-pip unzip firefox wget
+RUN apt-get update && apt-get install --quiet --assume-yes python-pip unzip wget
 # install Maven
 USER root
 RUN apt-get update && apt-get install -y maven
