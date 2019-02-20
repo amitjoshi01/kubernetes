@@ -17,7 +17,7 @@ RUN /usr/local/bin/install-plugins.sh kubernetes
 
 USER root
 #Test
-RUN apt-get update && apt-get install --quiet --assume-yes python-pip unzip firefox wget
+RUN apt-get update && apt-get install --quiet --assume-yes python-pip unzip wget
 # install Maven
 RUN apt-get update && apt-get install -y maven
 RUN apt-get update && apt-get install -y curl
