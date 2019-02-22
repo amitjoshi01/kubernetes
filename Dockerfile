@@ -1,5 +1,8 @@
 FROM jenkins/jenkins:latest
 
+ARG GIT_COMMIT=unspecified
+LABEL git_commit=$GIT_COMMIT
+
 # Distributed Builds plugins
 RUN /usr/local/bin/install-plugins.sh ssh-slaves
 
