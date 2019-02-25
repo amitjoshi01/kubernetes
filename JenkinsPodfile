@@ -1,0 +1,32 @@
+pipeline {
+    environment{
+        //repository = "tecong/keycloak"
+        repository = "amitjoshi/jenkins"
+    }
+    agent any
+    stages {
+        stage('sync the code')
+        {
+            steps{
+                git changelog: false, credentialsId: 'github-credentials', poll: false, url: 'https://github.com/amitjoshi01/kubernetes.git'
+            }
+        }
+        stage('build the image'){
+            steps{
+                withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'docker-hub',
+                usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD']]){
+                sh "docker build -t " + repository + ":${env.BUILD_ID} ."
+                }
+            }
+        }
+        stage('deploy image') {
+        steps {
+            withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'docker-hub',
+                usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD']]){
+                    sh "docker login -u $USERNAME -p $PASSWORD"
+                    sh "docker push " + repository + ":${env.BUILD_ID}"
+                }
+            }
+        }
+    }
+}
