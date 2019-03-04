@@ -11,6 +11,7 @@ RUN /usr/local/bin/install-plugins.sh workflow-aggregator
 RUN /usr/local/bin/install-plugins.sh docker-plugin
 RUN /usr/local/bin/install-plugins.sh m2release
 RUN /usr/local/bin/install-plugins.sh robot
+RUN /usr/local/bin/install-plugins.sh kubernetes-cli
 
 # Scaling
 RUN /usr/local/bin/install-plugins.sh kubernetes

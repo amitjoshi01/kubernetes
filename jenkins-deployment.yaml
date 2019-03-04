@@ -9,7 +9,7 @@ spec:
     - ReadWriteOnce
   resources:
     requests:
-      storage: 50Gi
+      storage: 100Gi
   storageClassName: vmware-default
 
 ---
@@ -27,17 +27,9 @@ spec:
       labels:
         app: jenkins
     spec:
-#      initContainers:
-#      - name: install-kubectl
-#        image: allanlei/kubectl
-#        volumeMounts:
-#        - name: kubectl
-#          mountPath: /data
-#        command: ["cp", "/usr/local/bin/kubectl", "/data/kubectl"]
       containers:
         - name: jenkins
-          image: amitjoshi/jenkins:1.4
-          #image: h1kkan/jenkins-docker:lts
+          image: amitjoshi/jenkins:1
           env:
             - name: JAVA_OPTS
               value: -Djenkins.install.runSetupWizard=false
@@ -51,9 +43,6 @@ spec:
           volumeMounts:
             - name: jenkins-home
               mountPath: /var/jenkins_home
-#            - name: kubectl
-#              subPath: kubectl
-#              mountPath: /usr/local/bin/kubectl
         - name: dind-daemon 
           image: docker:1.12.6-dind 
           resources: 
@@ -74,6 +63,4 @@ spec:
             claimName: jenkins-pv-claim
         - name: docker-graph-storage 
           emptyDir: {}
-#        - name: kubectl
-#          emptyDir: {}
 
