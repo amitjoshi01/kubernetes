@@ -29,7 +29,7 @@ spec:
     spec:
       containers:
         - name: jenkins
-          image: amitjoshi/jenkins:1
+          image: amitjoshi/jenkins:8
           env:
             - name: JAVA_OPTS
               value: -Djenkins.install.runSetupWizard=false
