@@ -14,7 +14,7 @@ RUN /usr/local/bin/install-plugins.sh robot
 RUN /usr/local/bin/install-plugins.sh kubernetes-cli
 
 # Scaling
-RUN /usr/local/bin/install-plugins.sh kubernetes
+#RUN /usr/local/bin/install-plugins.sh kubernetes
 
 USER root
 #Test
