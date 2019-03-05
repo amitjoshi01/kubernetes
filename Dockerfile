@@ -14,7 +14,7 @@ RUN /usr/local/bin/install-plugins.sh robot
 RUN /usr/local/bin/install-plugins.sh kubernetes-cli
 
 # Scaling
-#RUN /usr/local/bin/install-plugins.sh kubernetes
+RUN /usr/local/bin/install-plugins.sh kubernetes
 
 USER root
 #Test
@@ -23,7 +23,6 @@ RUN apt-get update && apt-get install --quiet --assume-yes python-pip unzip wget
 RUN apt-get update && apt-get install -y maven
 RUN apt-get update && apt-get install -y curl
 RUN apt-get install -y vim
-#RUN curl -sSL https://get.docker.com/ | sh
 
 #install kubectl
 RUN apt-get update && apt-get install -y apt-transport-https
@@ -32,4 +31,5 @@ RUN echo "deb https://apt.kubernetes.io/ kubernetes-xenial main" | tee -a /etc/a
 RUN apt-get update
 RUN apt-get install -y kubectl
 RUN apt-get update
+#RUN curl -sSL https://get.docker.com/ | sh
 USER jenkins
