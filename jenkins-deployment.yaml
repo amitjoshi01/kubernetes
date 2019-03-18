@@ -40,9 +40,22 @@ spec:
               containerPort: 8080
             - name: jnlp-port
               containerPort: 50000
+          resources:
+           requests:
+            cpu: "2"
+            memory: 20Gi
+          securityContext:
+           capabilities:
+             add:
+             - NET_ADMIN
+             - SYS_TIME
           volumeMounts:
             - name: jenkins-home
               mountPath: /var/jenkins_home
+            - mountPath: /var/jenkins_home/certs
+              name: jenkins-ssl-keystore-cert
+            - mountPath: /var/jenkins_home/certs/k8s
+              name: jenkins-k8s-ca-cert
         - name: dind-daemon 
           image: docker:1.12.6-dind 
           resources: 
@@ -61,6 +74,14 @@ spec:
         - name: jenkins-home
           persistentVolumeClaim:
             claimName: jenkins-pv-claim
+        - name: jenkins-ssl-keystore-cert
+          secret:
+             defaultMode: 420
+             secretName: ssl-keystore-cert
+        - name: jenkins-k8s-ca-cert
+          secret:
+             defaultMode: 420
+             secretName: k8s-ca-cert
         - name: docker-graph-storage 
           emptyDir: {}
 
