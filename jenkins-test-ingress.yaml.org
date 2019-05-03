@@ -1,0 +1,21 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  annotations:
+    ncp/internal_ip_for_policy: 100.64.160.15
+  generation: 2
+  name: jenkins-test-ingress
+  namespace: jenkins
+spec:
+  rules:
+  - host: jenkins-test.ing.teco.online
+    http:
+      paths:
+      - backend:
+          serviceName: jenkins
+          servicePort: 80
+status:
+  loadBalancer:
+    ingress:
+    - ip: 11.4.4.66
+    - ip: 100.64.160.15

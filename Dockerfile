@@ -4,14 +4,20 @@ FROM jenkins/jenkins:latest
 RUN /usr/local/bin/install-plugins.sh ssh-slaves
 
 # install Notifications and Publishing plugins
-#RUN /usr/local/bin/install-plugins.sh email-ext
-#RUN /usr/local/bin/install-plugins.sh mailer
-#RUN /usr/local/bin/install-plugins.sh slack
-#RUN /usr/local/bin/install-plugins.sh workflow-aggregator
 RUN /usr/local/bin/install-plugins.sh docker-plugin
 RUN /usr/local/bin/install-plugins.sh m2release
 RUN /usr/local/bin/install-plugins.sh robot
 RUN /usr/local/bin/install-plugins.sh kubernetes-cli
+RUN /usr/local/bin/install-plugins.sh credentials
+RUN /usr/local/bin/install-plugins.sh docker-workflow
+RUN /usr/local/bin/install-plugins.sh git
+RUN /usr/local/bin/install-plugins.sh github-api
+RUN /usr/local/bin/install-plugins.sh github
+RUN /usr/local/bin/install-plugins.sh kubernetes
+RUN /usr/local/bin/install-plugins.sh workflow-aggregator
+RUN /usr/local/bin/install-plugins.sh workflow-step-api
+RUN /usr/local/bin/install-plugins.sh scm-api
+RUN /usr/local/bin/install-plugins.sh ssh-credentials
 
 # Scaling
 #RUN /usr/local/bin/install-plugins.sh kubernetes

@@ -1,0 +1,13 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: jenkins-test-ingress
+  namespace: jenkins
+spec:
+  rules:
+  - host: jenkins-test.ing.teco.online
+    http:
+      paths:
+      - backend:
+          serviceName: jenkins
+          servicePort: 80
