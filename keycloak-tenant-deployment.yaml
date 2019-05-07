@@ -42,9 +42,22 @@ spec:
             - name: KEYCLOAK_HTTPS_PORT
               value: "8443"
             - name: KEYCLOAK_USER
-              value: admin
+              valueFrom:
+                secretKeyRef:
+                    name: keycloak-secret
+                    key: username 
+#              value: admin
             - name: KEYCLOAK_PASSWORD
-              value: password
+              valueFrom:
+                  secretKeyRef:
+                     name: keycloak-secret
+                     key: password
+            - name: KEYCLOAK_IMPORT
+              valueFrom:
+                  secretKeyRef:
+                      name: keycloak-secret
+                      key: realm-file
+#              value: password
 #              valueFrom:
 #                secretKeyRef:
 #                  name: keycloak-secret
