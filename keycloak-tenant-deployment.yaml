@@ -1,0 +1,71 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  annotations:
+    deployment.kubernetes.io/revision: "2"
+  creationTimestamp: null
+  generation: 1
+  labels:
+    run: keycloak
+  name: keycloak
+  selfLink: /apis/extensions/v1beta1/namespaces/tecoprod-keycloak-testingtenant/deployments/keycloak
+spec:
+  progressDeadlineSeconds: 600
+  replicas: 2
+  revisionHistoryLimit: 2
+  selector:
+    matchLabels:
+      run: keycloak
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        run: keycloak
+    spec:
+      containers:
+        - env:
+#            - name: KEYSTORE_PASSWORD
+#              valueFrom:
+#                secretKeyRef:
+#                  key: keystore_password
+#                  name: keycloak-secret
+#            - name: KEY_PASSWORD
+#              valueFrom:
+#                secretKeyRef:
+#                  key: key_password
+#                  name: keycloak-secret
+            - name: KEYCLOAK_HTTPS_PORT
+              value: "8443"
+            - name: KEYCLOAK_USER
+              value: admin
+            - name: KEYCLOAK_PASSWORD
+              value: password
+#              valueFrom:
+#                secretKeyRef:
+#                  name: keycloak-secret
+#                  key: keycloak_password
+          image: jboss/keycloak:latest
+          imagePullPolicy: IfNotPresent
+          name: keycloak
+          resources: {}
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+#          volumeMounts:
+#            - mountPath: /etc/localtime
+#              name: tz-config
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
+#      volumes:
+#        - hostPath:
+#            path: /usr/share/zoneinfo/Europe/Helsinki
+#            type: ""
+#          name: tz-config
+status: {}
