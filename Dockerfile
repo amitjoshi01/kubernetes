@@ -37,3 +37,6 @@ RUN echo "deb https://apt.kubernetes.io/ kubernetes-xenial main" | tee -a /etc/a
 RUN apt-get update && apt-get install -y kubectl
 RUN curl -sSL https://get.docker.com/ | sh
 USER jenkins
+
+# pip install
+RUN pip install pycryptodome
